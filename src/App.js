@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import resumeReducer from './Redux/ResumReducer';
+import ResumeForm from './Components/ResumeForm';
+import ResumeView from './Components/ResumView';
+import Header from './Components/Header';
+const store = createStore(resumeReducer);
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Header/>
+    <Router>
+      <Routes>
+        <Route path="/"  element={<ResumeForm/>} />
+        <Route path="/view" element={<ResumeView/>} />
+      </Routes>
+    </Router>
+    </Provider>
   );
 }
 
